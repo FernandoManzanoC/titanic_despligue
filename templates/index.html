@@ -39,7 +39,8 @@
     <h2>Probabilidad de Supervivencia: {{ probabilidad }}</h2>
     {% endif %}
     
-    <h1>Reentrenar el Modelo</h1>
+    <h1>¿Deseas reentrenar el Modelo?</h1>
+
     <form method="post" action="{{ url_for('retrain') }}">
         <input type="submit" value="Reentrenar Modelo">
     </form>
