@@ -51,8 +51,8 @@ def predict():  # Ligado al endpoint '/api/v1/predict', con el método POST
         return render_template('index.html', probabilidad=round(probabilidad_supervivencia, 2))
 
 # Enruta la función al endpoint /api/v1/retrain
-@app.route('/api/v1/retrain', methods=['POST'])
-def retrain():  # Rutarlo al endpoint '/api/v1/retrain', metodo POST
+@app.route('/api/v1/retrain', methods=['GET'])
+def retrain():  # Rutarlo al endpoint '/api/v1/retrain', metodo GET
     # Verificar si el archivo CSV existe
     if os.path.exists(os.path.join(root_path, "data/titanic.csv")):
         # Cargar el dataset
