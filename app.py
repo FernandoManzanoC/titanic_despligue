@@ -54,9 +54,9 @@ def predict():  # Ligado al endpoint '/api/v1/predict', con el método POST
 @app.route('/api/v1/retrain', methods=['POST'])
 def retrain():  # Rutarlo al endpoint '/api/v1/retrain', metodo POST
     # Verificar si el archivo CSV existe
-    if os.path.exists(os.path.join(root_path, "titanic.csv")):
+    if os.path.exists(os.path.join(root_path, "data/titanic.csv")):
         # Cargar el dataset
-        data = pd.read_csv(os.path.join(root_path, "titanic.csv"))
+        data = pd.read_csv(os.path.join(root_path, "data/titanic.csv"))
 
         # Preprocesamiento de datos
         features = ['sex', 'embarked', 'pclass', 'age']
