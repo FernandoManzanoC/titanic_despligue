@@ -8,6 +8,7 @@ from sklearn.metrics import accuracy_score
 
 # Configura el root_path donde estarán guardados los archivos del modelo y el dataset
 root_path = '/home/FernandoMC/titanic_despligue/'
+# root_path = os.getcwd()
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -69,8 +70,8 @@ def retrain():  # Rutarlo al endpoint '/api/v1/retrain', metodo POST
         le_sex = joblib.load(os.path.join(root_path, 'le_sex.pkl'))
         le_embarked = joblib.load(os.path.join(root_path, 'le_embarked.pkl'))
 
-        data['sex'] = le_sex.transform(data['sex'])
-        data['embarked'] = le_embarked.transform(data['embarked'])
+        # data['sex'] = le_sex.transform(data['sex'])
+        # data['embarked'] = le_embarked.transform(data['embarked'])
 
         # Separar variables independientes y dependientes
         X = data[features]
