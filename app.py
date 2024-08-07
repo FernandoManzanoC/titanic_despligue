@@ -7,8 +7,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 # Configura el root_path donde estarán guardados los archivos del modelo y el dataset
-root_path = '/home/FernandoMC/titanic_despligue/'
-# root_path = os.getcwd()
+# root_path = '/home/FernandoMC/titanic_despligue/'
+root_path = os.getcwd()
 
 app = Flask(__name__)
 app.config['DEBUG'] = True

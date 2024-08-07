@@ -3,51 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicción de Supervivencia en el Titanic</title>
+    <title>Predictor de supervivencia al desastre del Titanic</title>
+    <style>
+        /* Cambiar el color de fondo a un sepia más claro */
+        body {
+            background-color: #f4ecd8;
+            color: #000;
+            font-family: 'Patrick Hand', cursive;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Estilo para la fuente handwriting y tamaños diferenciados */
+        h1 {
+            font-size: 36px; /* Tamaño de letra para h1 */
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 28px; /* Tamaño de letra para h2 */
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        p, label, select, input {
+            font-size: 18px; /* Tamaño de letra para el texto general */
+        }
+
+        /* Centrando la imagen y asegurando que se vea bien */
+        .titanic-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%; /* Ajuste al 100% del contenedor */
+            max-width: 500px; /* Limitar el ancho máximo */
+            height: auto; /* Mantener proporciones de la imagen */
+        }
+
+        /* Estilizando y centrando formularios */
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Estilizar los botones para que sean más grandes */
+        input[type="submit"] {
+            padding: 10px 20px; /* Tamaño de padding para agrandar el botón */
+            font-size: 20px; /* Aumentar el tamaño de la letra en el botón */
+            border-radius: 8px; /* Bordes redondeados */
+            background-color: #d4a373; /* Color de fondo del botón */
+            color: #fff; /* Color del texto del botón */
+            border: none; /* Quitar borde */
+            cursor: pointer; /* Cambiar el cursor cuando se pase sobre el botón */
+        }
+
+        /* Cambiar el color del botón al pasar el ratón */
+        input[type="submit"]:hover {
+            background-color: #a67b5b; /* Color de fondo al pasar el ratón */
+        }
+
+        /* Centrando todo el contenido */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Contenedor para el contenido */
+        .content {
+            max-width: 800px;
+            text-align: center;
+        }
+
+    </style>
+    <!-- Enlace a Google Fonts para la fuente handwriting -->
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Predicción de Supervivencia en el Titanic</h1>
-    
-    <form method="post" action="{{ url_for('predict') }}">
-        <label for="sex">Sexo:</label>
-        <select name="sex" id="sex">
-            <option value="male">Hombre</option>
-            <option value="female">Mujer</option>
-        </select><br><br>
+    <div class="content">
+        <h1>¿Sobrevivirías al desastre del Titanic?</h1>
+        
+        <!-- Párrafo con la historia del Titanic -->
+        <p>
+            El RMS Titanic fue un transatlántico británico que se hundió en la madrugada del 15 de abril de 1912, 
+            durante su viaje inaugural desde Southampton a Nueva York. Considerado el barco más grande y lujoso de su tiempo, 
+            su trágico hundimiento, debido a la colisión con un iceberg, resultó en la muerte de más de 1.500 personas, 
+            convirtiéndose en uno de los desastres marítimos más fatales de la historia moderna.
+            <br><br>
+            Al estudiar las características de los supervivientes, encontramos que la suerte no sonrió a todos por igual.
+            Atrévete a jugar con las distintas características de los pasajeros y encuentra cómo varía su probabilidad de supervivencia.
+        </p>
 
-        <label for="embarked">Puerto de embarque:</label>
-        <select name="embarked" id="embarked">
-            <option value="C">Cherburgo</option>
-            <option value="Q">Queenstown</option>
-            <option value="S">Southampton</option>
-        </select><br><br>
+        <!-- Imagen del Titanic -->
+        <img src="img_titanic.jpg" alt="Imagen del Titanic" width="300" height="200">
 
-        <label for="pclass">Clase del pasaje:</label>
-        <select name="pclass" id="pclass">
-            <option value="1">Primera Clase</option>
-            <option value="2">Segunda Clase</option>
-            <option value="3">Tercera Clase</option>
-        </select><br><br>
+        <!-- Formulario de predicción -->
+        <form method="post" action="{{ url_for('predict') }}">
+            <label for="sex">Sexo:</label>
+            <select name="sex" id="sex">
+                <option value="male">Hombre</option>
+                <option value="female">Mujer</option>
+            </select><br><br>
 
-        <label for="age">Edad:</label>
-        <input type="number" step="any" name="age" id="age"><br><br>
+            <label for="embarked">Puerto de embarque:</label>
+            <select name="embarked" id="embarked">
+                <option value="C">Cherburgo</option>
+                <option value="Q">Queenstown</option>
+                <option value="S">Southampton</option>
+            </select><br><br>
 
-        <input type="submit" value="Predecir">
-    </form>
+            <label for="pclass">Clase del pasaje:</label>
+            <select name="pclass" id="pclass">
+                <option value="1">Primera Clase</option>
+                <option value="2">Segunda Clase</option>
+                <option value="3">Tercera Clase</option>
+            </select><br><br>
 
-    {% if probabilidad is not none %}
-    <h2>Probabilidad de Supervivencia: {{ probabilidad }}</h2>
-    {% endif %}
-    
-    <h1> Si deseas reentrenar el Modelo pulsa el botón</h1>
+            <label for="age">Edad:</label>
+            <input type="number" step="any" name="age" id="age"><br><br>
 
-    <form method="post" action="{{ url_for('retrain') }}">
-        <input type="submit" value="Reentrenar Modelo">
-    </form>
+            <input type="submit" value="Predecir">
+        </form>
 
-    {% if retrain_message is not none %}
-    <h2>{{ retrain_message }}</h2>
-    {% endif %}
-    
+        <!-- Mostrar probabilidad de supervivencia si está disponible -->
+        {% if probabilidad is not none %}
+        <h2>Probabilidad de Supervivencia: {{ probabilidad }}</h2>
+        {% endif %}
+        
+        <h1>Si deseas reentrenar el Modelo, pulsa el botón</h1>
+
+        <!-- Botón para reentrenar el modelo -->
+        <form method="post" action="{{ url_for('retrain') }}">
+            <input type="submit" value="Reentrenar Modelo">
+        </form>
+
+        {% if retrain_message is not none %}
+        <h2>{{ retrain_message }}</h2>
+        {% endif %}
+
+        <!-- Explicación sobre el modelo Random Forest -->
+        <p>
+            Este modelo utiliza un algoritmo de <strong>Random Forest</strong>, 
+            que combina múltiples árboles de decisión para mejorar la precisión de las predicciones.
+            Random Forest es conocido por su robustez y capacidad para manejar datos complejos, lo que lo hace ideal para este tipo de análisis.
+        </p>
+    </div>
 </body>
 </html>
