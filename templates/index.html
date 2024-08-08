@@ -9,7 +9,7 @@
         body {
             background-color: #f4ecd8;
             color: #000;
-            font-family: 'Patrick Hand', cursive;
+            font-family: 'Arial', cursive;
             margin: 0;
             padding: 20px;
         }
@@ -30,20 +30,27 @@
             font-size: 18px; /* Tamaño de letra para el texto general */
         }
 
-        /* Centrando la imagen y asegurando que se vea bien */
+        /* Contenedor para el formulario y la imagen */
+        .form-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        /* Estilo para la imagen del Titanic */
         .titanic-image {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%; /* Ajuste al 100% del contenedor */
-            max-width: 500px; /* Limitar el ancho máximo */
+            max-width: 400px; /* Limitar el ancho máximo */
             height: auto; /* Mantener proporciones de la imagen */
+            margin-right: 20px; /* Espacio entre el formulario y la imagen */
         }
 
         /* Estilizando y centrando formularios */
         form {
             margin-bottom: 20px;
-            text-align: center;
+            text-align: left;
+            flex: 1; /* El formulario ocupará el espacio disponible */
+            margin-right: 20px; /* Agrega espacio entre el formulario y la imagen */
         }
 
         /* Estilizar los botones para que sean más grandes */
@@ -90,40 +97,46 @@
             durante su viaje inaugural desde Southampton a Nueva York. Considerado el barco más grande y lujoso de su tiempo, 
             su trágico hundimiento, debido a la colisión con un iceberg, resultó en la muerte de más de 1.500 personas, 
             convirtiéndose en uno de los desastres marítimos más fatales de la historia moderna.
-            <br><br>
+            <br><br>        
             Al estudiar las características de los supervivientes, encontramos que la suerte no sonrió a todos por igual.
             Atrévete a jugar con las distintas características de los pasajeros y encuentra cómo varía su probabilidad de supervivencia.
         </p>
-
+        
+        <!-- Contenedor del formulario y la imagen -->
+        <div class="form-container">
+            <!-- Imagen del Titanic ajustada al ancho del texto -->
+            <img src="{{ url_for('static', filename='Titanic-PNG.png') }}" alt="Imagen del Titanic" class="titanic-image">
         
 
-        <!-- Formulario de predicción -->
-        <form method="post" action="{{ url_for('predict') }}">
-            <label for="sex">Sexo:</label>
-            <select name="sex" id="sex">
-                <option value="male">Hombre</option>
-                <option value="female">Mujer</option>
-            </select><br><br>
+            <!-- Formulario de predicción -->
+            <form method="post" action="{{ url_for('predict') }}">
+                <label for="sex">Sexo:</label>
+                <select name="sex" id="sex">
+                    <option value="male">Hombre</option>
+                    <option value="female">Mujer</option>
+                </select><br><br>
 
-            <label for="embarked">Puerto de embarque:</label>
-            <select name="embarked" id="embarked">
-                <option value="C">Cherburgo</option>
-                <option value="Q">Queenstown</option>
-                <option value="S">Southampton</option>
-            </select><br><br>
+                <label for="embarked">Puerto de embarque:</label>
+                <select name="embarked" id="embarked">
+                    <option value="C">Cherburgo</option>
+                    <option value="Q">Queenstown</option>
+                    <option value="S">Southampton</option>
+                </select><br><br>
 
-            <label for="pclass">Clase del pasaje:</label>
-            <select name="pclass" id="pclass">
-                <option value="1">Primera Clase</option>
-                <option value="2">Segunda Clase</option>
-                <option value="3">Tercera Clase</option>
-            </select><br><br>
+                <label for="pclass">Clase del pasaje:</label>
+                <select name="pclass" id="pclass">
+                    <option value="1">Primera Clase</option>
+                    <option value="2">Segunda Clase</option>
+                    <option value="3">Tercera Clase</option>
+                </select><br><br>
 
-            <label for="age">Edad:</label>
-            <input type="number" step="any" name="age" id="age"><br><br>
+                <label for="age">Edad:</label>
+                <input type="number" step="any" name="age" id="age"><br><br>
 
-            <input type="submit" value="Predecir">
-        </form>
+                <input type="submit" value="Predecir">
+            </form>
+        </div>
+            
 
         <!-- Mostrar probabilidad de supervivencia si está disponible -->
         {% if probabilidad is not none %}
