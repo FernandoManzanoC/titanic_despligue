@@ -49,7 +49,7 @@ def predict():  # Ligado al endpoint '/api/v1/predict', con el método POST
         probabilidad_supervivencia = model.predict_proba(features)[:, 1][0]
 
         # Renderizar la plantilla con el resultado
-        return render_template('index.html', probabilidad=round(probabilidad_supervivencia, 2))
+        return render_template('index1.html', probabilidad=round(probabilidad_supervivencia, 2))
 
 # Enruta la función al endpoint /api/v1/retrain
 @app.route('/api/v1/retrain', methods=['POST'])
@@ -92,9 +92,9 @@ def retrain():  # Rutarlo al endpoint '/api/v1/retrain', metodo POST
         joblib.dump(model, os.path.join(root_path, 'titanic_model.pkl'))
 
         # Devolver un mensaje de éxito a la plantilla
-        return render_template('index.html', retrain_message=f"Modelo reentrenado con éxito. Nueva precisión: {accuracy:.2f}")
+        return render_template('index1.html', retrain_message=f"Modelo reentrenado con éxito. Nueva precisión: {accuracy:.2f}")
     else:
-        return render_template('index.html', retrain_message="El archivo CSV del Titanic no se encontró. No se realizó el reentrenamiento.")
+        return render_template('index1.html', retrain_message="El archivo CSV del Titanic no se encontró. No se realizó el reentrenamiento.")
 
 if __name__ == '__main__':
     app.run()
