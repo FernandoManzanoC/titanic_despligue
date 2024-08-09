@@ -16,7 +16,7 @@ app.config['DEBUG'] = True
 # Enruta la landing page (endpoint /)
 @app.route('/', methods=['GET'])
 def index():  # Ligado al endpoint "/" o sea el home, con el método GET
-    return render_template('index.html')
+    return render_template('index1.html')
 
 # Enruta la función al endpoint /api/v1/predict
 @app.route('/api/v1/predict', methods=['POST'])
@@ -78,7 +78,7 @@ def retrain():  # Rutarlo al endpoint '/api/v1/retrain', metodo POST
         y = data[target]
 
         # Dividir el dataset en entrenamiento y prueba. Cambiado random a 24 desde 42
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=64)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=44)
 
         # Entrenar un nuevo modelo
         model = RandomForestClassifier(n_estimators=100, random_state=42)
